@@ -8,10 +8,18 @@ export type Evolution = {
   how: string;
 };
 
-export interface Pokemon {
-  id: string;
-  dexNumber: number;
+export type Variation = {
   name: string;
+  art: string;
+};
+
+export interface Pokemon {
+  id?: string;
+  dexNumber: number;
+  formId: string;
+  variations: Variation[];
+  name: string;
+  region: string;
   species: string;
   types: string[];
   art: string;
