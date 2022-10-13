@@ -13,8 +13,19 @@ export type Variation = {
   art: string;
 };
 
+export enum Region {
+  kanto = 'kanto',
+  johto = 'johto',
+  hoenn = 'hoenn',
+  sinnoh = 'sinnoh',
+  unova = 'unova',
+  kalos = 'kalos',
+  alola = 'alola',
+  galar = 'galar',
+}
+
 export interface Pokemon {
-  id?: string;
+  id: string;
   dexNumber: number;
   formId: string;
   variations: Variation[];
@@ -23,15 +34,21 @@ export interface Pokemon {
   species: string;
   types: string[];
   art: string;
+
   hp: number;
   speed: number;
   specialAttack: number;
+  attack: number;
   specialDefense: number;
+  defense: number;
+
   abilities: string[];
   evYield: EvYield;
   entry: string;
+
   evolvesFrom: Evolution[];
-  EvolvesTo: Evolution[];
+  evolvesTo: Evolution[];
+
   height: number;
   weight: number;
 }

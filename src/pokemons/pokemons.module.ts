@@ -1,9 +1,13 @@
 import { Module } from '@nestjs/common';
-import { PokemonsService } from './pokemons.service';
+import { PokemonsRepositoryToken, PokemonsService } from './pokemons.service';
 import { PokemonsController } from './pokemons.controller';
+import { PrismaPokemonRepository } from './repositories/PrismaPokemon.repository';
 
 @Module({
   controllers: [PokemonsController],
-  providers: [PokemonsService],
+  providers: [
+    { provide: PokemonsRepositoryToken, useValue: PrismaPokemonRepository },
+    PokemonsService,
+  ],
 })
 export class PokemonsModule {}

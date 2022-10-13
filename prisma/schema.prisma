@@ -25,14 +25,16 @@ model Pokemon {
   defense        Int
   specialAttack  Int
   specialDefense Int
-  abilities      String
-  EvYield        Json
-  Entry          String
+  abilities      String[]
+  evYield        Json
+  entry          String
   evolvesFrom    Json
   evolvesTo      Json
   height         Int
   weight         Int
   variations     Json
+
+  @@map("pokemons")
 }
 
 // model Type {

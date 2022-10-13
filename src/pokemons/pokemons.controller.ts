@@ -1,7 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+
 import { PokemonsService } from './pokemons.service';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
+import { Pokemon, Region } from './entities/pokemon.entity';
+
+// ---------------------------------------------------------------------------------------------- //
+
+interface ListQuery {
+  region: string;
+}
+
+// ---------------------------------------------------------------------------------------------- //
 
 @Controller('pokemons')
 export class PokemonsController {
@@ -13,13 +23,19 @@ export class PokemonsController {
   }
 
   @Get()
-  findAll() {
-    return this.pokemonsService.findAll();
+  list(@Query() query: ListQuery): Promise<Pokemon[]> {
+    const { region } = query;
+
+    if (Object.keys(Region).includes(region)) {
+      return this.pokemonsService.list(region);
+    }
+
+    return this.pokemonsService.list();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.pokemonsService.findOne(+id);
+  findSpecies(@Param('id') id: string) {
+    return this.pokemonsService.findSpecies(+id);
   }
 
   @Patch(':id')

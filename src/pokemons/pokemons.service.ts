@@ -1,18 +1,31 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
+import { PokemonRepository } from './repositories/Pokemon.repository';
+
+// ---------------------------------------------------------------------------------------------- //
+
+export const PokemonsRepositoryToken = Symbol('PokemonsRepository');
+
+// ---------------------------------------------------------------------------------------------- //
 
 @Injectable()
 export class PokemonsService {
+  constructor(@Inject(PokemonsRepositoryToken) private pokemonsRepository: PokemonRepository) {}
+
   create(createPokemonDto: CreatePokemonDto) {
     return 'This action adds a new pokemon';
   }
 
-  findAll() {
-    return `This action returns all pokemons`;
+  async list(region = 'kanto') {
+    const pokemons = await this.pokemonsRepository.listByRegion(region);
+
+    return pokemons;
+    // return `This action returns all pokemons`;
   }
 
-  findOne(id: number) {
+  findSpecies(id: number) {
     return `This action returns a #${id} pokemon`;
   }
 

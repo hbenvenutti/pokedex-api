@@ -12,12 +12,14 @@ export class CreatePokemonDto {
   hp: number;
   speed: number;
   specialAttack: number;
+  attack: number;
   specialDefense: number;
+  defense: number;
   abilities: string[];
   evYield: EvYield;
   entry: string;
   evolvesFrom: Evolution[];
-  EvolvesTo: Evolution[];
+  evolvesTo: Evolution[];
   height: number;
   weight: number;
 }
