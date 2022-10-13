@@ -4,7 +4,7 @@ export type EvYield = {
 };
 
 export type Evolution = {
-  pokemon_id: string;
+  pokemonId: string;
   how: string;
 };
 
@@ -27,8 +27,10 @@ export enum Region {
 export interface Pokemon {
   id: string;
   dexNumber: number;
+
   formId: string;
   variations: Variation[];
+
   name: string;
   region: string;
   species: string;
@@ -43,12 +45,12 @@ export interface Pokemon {
   defense: number;
 
   abilities: string[];
-  evYield: EvYield;
+  evYield: EvYield[];
   entry: string;
 
   evolvesFrom: Evolution[];
   evolvesTo: Evolution[];
 
-  height: number;
-  weight: number;
+  height: string;
+  weight: string;
 }

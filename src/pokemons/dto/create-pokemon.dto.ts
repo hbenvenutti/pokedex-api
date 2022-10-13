@@ -16,10 +16,10 @@ export class CreatePokemonDto {
   specialDefense: number;
   defense: number;
   abilities: string[];
-  evYield: EvYield;
+  evYield: EvYield[];
   entry: string;
   evolvesFrom: Evolution[];
   evolvesTo: Evolution[];
-  height: number;
-  weight: number;
+  height: string;
+  weight: string;
 }

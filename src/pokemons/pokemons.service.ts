@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
+import { Pokemon } from './entities/pokemon.entity';
 import { PokemonRepository } from './repositories/Pokemon.repository';
 
 // ---------------------------------------------------------------------------------------------- //
@@ -13,16 +14,23 @@ export const PokemonRepositoryToken = Symbol('PokemonRepositoryToken');
 @Injectable()
 export class PokemonsService {
   constructor(
-    @Inject('PokemonRepository')
+    @Inject(PokemonRepositoryToken)
     private pokemonRepository: PokemonRepository,
   ) {}
 
-  create(createPokemonDto: CreatePokemonDto) {
-    return 'This action adds a new pokemon';
+  async create(data: CreatePokemonDto): Promise<Pokemon> {
+    // Todo: verify if pokemon exists //
+    const pokemon = await this.pokemonRepository.findByFormId(data.formId);
+
+    if (pokemon) {
+      throw new Error();
+    }
+
+    return this.pokemonRepository.create(data);
   }
 
   async list(region = 'kanto') {
-    const pokemons = await this.pokemonRepository.listByRegion(region);
+    const pokemons = await this.pokemonRepository.findByRegion(region);
 
     return pokemons;
   }

@@ -6,17 +6,20 @@ import { PokemonRepository } from './Pokemon.repository';
 // ---------------------------------------------------------------------------------------------- //
 
 export class PrismaPokemonRepository implements PokemonRepository {
+  private repository = new PrismaService().pokemon;
   private prisma = new PrismaService();
 
   async create(data: CreatePokemonDto): Promise<Pokemon> {
-    const pokemon = await this.prisma.pokemon.create({
+    const pokemon = await this.repository.create({
       data,
     });
 
     return pokemon as Pokemon;
   }
 
-  async listByRegion(region: string): Promise<Pokemon[]> {
+  // -------------------------------------------------------------------------------------------- //
+
+  async findByRegion(region: string): Promise<Pokemon[]> {
     const pokemons = await this.prisma.pokemon.findMany({
       where: {
         region,
@@ -24,6 +27,14 @@ export class PrismaPokemonRepository implements PokemonRepository {
     });
 
     return pokemons as Pokemon[];
+  }
+
+  // -------------------------------------------------------------------------------------------- //
+
+  async findByFormId(formId: string): Promise<Pokemon | undefined> {
+    const pokemon = (await this.repository.findUnique({ where: { formId } })) as Pokemon;
+
+    return pokemon;
   }
 }
 

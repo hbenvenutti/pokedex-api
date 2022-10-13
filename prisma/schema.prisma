@@ -30,8 +30,8 @@ model Pokemon {
   entry          String
   evolvesFrom    Json
   evolvesTo      Json
-  height         Int
-  weight         Int
+  height         String
+  weight         String
   variations     Json
 
   @@map("pokemons")

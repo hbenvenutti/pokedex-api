@@ -2,6 +2,8 @@
 /dist
 /node_modules
 .env
+pokemons.json
+
 # Logs
 logs
 *.log

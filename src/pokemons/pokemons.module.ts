@@ -7,7 +7,7 @@ import { PrismaPokemonRepository } from './repositories/PrismaPokemon.repository
   controllers: [PokemonsController],
   providers: [
     {
-      provide: 'PokemonRepository',
+      provide: PokemonRepositoryToken,
       useValue: new PrismaPokemonRepository(),
     },
     PokemonsService,
