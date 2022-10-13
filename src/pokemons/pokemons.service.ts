@@ -6,23 +6,25 @@ import { PokemonRepository } from './repositories/Pokemon.repository';
 
 // ---------------------------------------------------------------------------------------------- //
 
-export const PokemonsRepositoryToken = Symbol('PokemonsRepository');
+export const PokemonRepositoryToken = Symbol('PokemonRepositoryToken');
 
 // ---------------------------------------------------------------------------------------------- //
 
 @Injectable()
 export class PokemonsService {
-  constructor(@Inject(PokemonsRepositoryToken) private pokemonsRepository: PokemonRepository) {}
+  constructor(
+    @Inject('PokemonRepository')
+    private pokemonRepository: PokemonRepository,
+  ) {}
 
   create(createPokemonDto: CreatePokemonDto) {
     return 'This action adds a new pokemon';
   }
 
   async list(region = 'kanto') {
-    const pokemons = await this.pokemonsRepository.listByRegion(region);
+    const pokemons = await this.pokemonRepository.listByRegion(region);
 
     return pokemons;
-    // return `This action returns all pokemons`;
   }
 
   findSpecies(id: number) {

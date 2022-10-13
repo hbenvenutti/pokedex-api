@@ -26,3 +26,5 @@ export class PrismaPokemonRepository implements PokemonRepository {
     return pokemons as Pokemon[];
   }
 }
+
+export const pokemonRepository = new PrismaPokemonRepository();

@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
-import { PokemonsRepositoryToken, PokemonsService } from './pokemons.service';
+import { PokemonRepositoryToken, PokemonsService } from './pokemons.service';
 import { PokemonsController } from './pokemons.controller';
 import { PrismaPokemonRepository } from './repositories/PrismaPokemon.repository';
 
 @Module({
   controllers: [PokemonsController],
   providers: [
-    { provide: PokemonsRepositoryToken, useValue: PrismaPokemonRepository },
+    {
+      provide: 'PokemonRepository',
+      useValue: new PrismaPokemonRepository(),
+    },
     PokemonsService,
   ],
 })
