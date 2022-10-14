@@ -19,7 +19,6 @@ export class PokemonsService {
   ) {}
 
   async create(data: CreatePokemonDto): Promise<Pokemon> {
-    // Todo: verify if pokemon exists //
     const pokemon = await this.pokemonRepository.findByFormId(data.formId);
 
     if (pokemon) {
@@ -35,7 +34,20 @@ export class PokemonsService {
     return pokemons;
   }
 
-  findSpecies(id: number) {
+  async findSpecies(search: string): Promise<Pokemon[]> {
+    const pokemon = isNaN(+search)
+      ? await this.pokemonRepository.findByName(search.toLowerCase())
+      : await this.pokemonRepository.findByDexNumber(+search);
+
+    if (pokemon) {
+      return this.pokemonRepository.listSpecies(pokemon.species);
+    }
+
+    console.log('not in if');
+    return [];
+  }
+
+  findPokemon(id: number) {
     return `This action returns a #${id} pokemon`;
   }
 

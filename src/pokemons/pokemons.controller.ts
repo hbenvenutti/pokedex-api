@@ -9,6 +9,7 @@ import { Pokemon, Region } from './entities/pokemon.entity';
 
 interface ListQuery {
   region: string;
+  search: string;
 }
 
 // ---------------------------------------------------------------------------------------------- //
@@ -24,7 +25,11 @@ export class PokemonsController {
 
   @Get()
   list(@Query() query: ListQuery): Promise<Pokemon[]> {
-    const { region } = query;
+    const { region, search } = query;
+
+    if (search) {
+      return this.pokemonsService.findSpecies(search);
+    }
 
     if (Object.keys(Region).includes(region)) {
       return this.pokemonsService.list(region);
@@ -35,7 +40,7 @@ export class PokemonsController {
 
   @Get(':id')
   findSpecies(@Param('id') id: string) {
-    return this.pokemonsService.findSpecies(+id);
+    return this.pokemonsService.findPokemon(+id);
   }
 
   @Patch(':id')
