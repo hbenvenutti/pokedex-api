@@ -43,7 +43,6 @@ export class PokemonsService {
       return this.pokemonRepository.listSpecies(pokemon.species);
     }
 
-    console.log('not in if');
     return [];
   }
 
