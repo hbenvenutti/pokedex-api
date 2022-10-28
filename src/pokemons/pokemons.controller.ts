@@ -39,8 +39,8 @@ export class PokemonsController {
   }
 
   @Get(':id')
-  findSpecies(@Param('id') id: string) {
-    return this.pokemonsService.findOnePokemon(+id);
+  findProfile(@Param('id') id: string) {
+    return this.pokemonsService.findOnePokemon(id);
   }
 
   @Patch(':id')

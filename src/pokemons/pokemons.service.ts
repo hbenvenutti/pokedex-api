@@ -46,8 +46,8 @@ export class PokemonsService {
     return [];
   }
 
-  async findOnePokemon(id: number) {
-    return await this.pokemonRepository.findByDexNumber(id);
+  async findOnePokemon(id: string) {
+    return await this.pokemonRepository.findByFormId(id);
   }
 
   update(id: number, updatePokemonDto: UpdatePokemonDto) {
