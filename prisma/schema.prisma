@@ -50,6 +50,7 @@ model Variation {
   height         String
   weight         String
   types          String[]
+  abilities      String[]
 
   @@map("variations")
 }

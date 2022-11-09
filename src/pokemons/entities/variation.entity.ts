@@ -4,6 +4,7 @@ export interface Variation {
   name: string;
   types: string[];
   art: string;
+  abilities: string[];
 
   hp: number;
   speed: number;
