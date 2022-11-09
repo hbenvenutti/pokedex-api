@@ -28,16 +28,39 @@ model Pokemon {
   abilities      String[]
   evYield        Json
   entry          String
-  evolvesFrom    Json
-  evolvesTo      Json
   height         String
   weight         String
-  variations     Json
 
   @@map("pokemons")
 }
 
-// model Type {
-//   id   String @id @default(auto()) @map("_id") @db.ObjectId
-//   name String @unique
-// }
+model Variation {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  name           String   @unique
+  type           String
+  entry          String
+  dexNumber      Int
+  art            String
+  hp             Int
+  speed          Int
+  attack         Int
+  defense        Int
+  specialAttack  Int
+  specialDefense Int
+  height         String
+  weight         String
+  types          String[]
+
+  @@map("variations")
+}
+
+model EvolutionLine {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  species     String @unique
+  babyStage   Json
+  firstStage  Json
+  secondStage Json
+  thirdStage  Json
+
+  @@map("evolution_lines")
+}

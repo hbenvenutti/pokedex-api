@@ -3,11 +3,15 @@ import { Inject, Injectable } from '@nestjs/common';
 import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { Pokemon } from './entities/pokemon.entity';
+import { EvolutionLinesRepository } from './repositories/EvolutionLines.repository';
 import { PokemonRepository } from './repositories/Pokemon.repository';
+import { VariationsRepository } from './repositories/Variations.repository';
 
 // ---------------------------------------------------------------------------------------------- //
 
 export const PokemonRepositoryToken = Symbol('PokemonRepositoryToken');
+export const VariationsRepositoryToken = Symbol('VariationsRepositoryToken');
+export const EvolutionLinesRepositoryToken = Symbol('VariationsRepositoryToken');
 
 // ---------------------------------------------------------------------------------------------- //
 
@@ -16,6 +20,12 @@ export class PokemonsService {
   constructor(
     @Inject(PokemonRepositoryToken)
     private pokemonRepository: PokemonRepository,
+
+    @Inject(VariationsRepositoryToken)
+    private variationsRepository: VariationsRepository,
+
+    @Inject(EvolutionLinesRepositoryToken)
+    private evolutionLinesRepository: EvolutionLinesRepository,
   ) {}
 
   async create(data: CreatePokemonDto): Promise<Pokemon> {
@@ -47,7 +57,11 @@ export class PokemonsService {
   }
 
   async findOnePokemon(id: string) {
-    return await this.pokemonRepository.findByFormId(id);
+    const pokemon = await this.pokemonRepository.findByFormId(id);
+    const variations = await this.variationsRepository.findByDexNumber(pokemon.dexNumber);
+    const evolutionLine = await this.evolutionLinesRepository.findBySpecies(pokemon.species);
+
+    return { pokemon, variations, evolutionLine };
   }
 
   update(id: number, updatePokemonDto: UpdatePokemonDto) {

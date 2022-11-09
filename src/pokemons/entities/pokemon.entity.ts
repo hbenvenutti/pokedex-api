@@ -29,7 +29,7 @@ export interface Pokemon {
   dexNumber: number;
 
   formId: string;
-  variations: Variation[];
+  // variations: Variation[];
 
   name: string;
   region: string;
@@ -48,8 +48,8 @@ export interface Pokemon {
   evYield: EvYield[];
   entry: string;
 
-  evolvesFrom: Evolution[];
-  evolvesTo: Evolution[];
+  // evolvesFrom: Evolution[];
+  // evolvesTo: Evolution[];
 
   height: string;
   weight: string;
