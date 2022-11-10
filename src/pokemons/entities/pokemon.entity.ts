@@ -22,6 +22,7 @@ export enum Region {
   kalos = 'kalos',
   alola = 'alola',
   galar = 'galar',
+  hisui = 'hisui',
 }
 
 export interface Pokemon {
